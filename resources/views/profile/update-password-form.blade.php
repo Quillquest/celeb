@@ -1,4 +1,4 @@
-<form method="POST" action="{{route('updateuserpass')}}">
+<form method="POST" action="{{ route('profile.password.update') }}">
     @csrf
     @method('PUT')
     <div class="row">
@@ -18,19 +18,20 @@
     <button type="submit" class="btn btn-primary">Update Password</button>
 </form>
 <div class="mt-4">
-    <a href="{{ route('twofa') }}" class="text-decoration-none">{{ __('Advance Account Settings') }} <i class="fas fa-arrow-right"></i> </a>
+    <a href="{{ route('2fa') }}" class="text-decoration-none">{{ __('Advance Account Settings') }} <i
+            class="fas fa-arrow-right"></i> </a>
 </div>
 
 <div class="row">
-                <div class="col-lg offset-lg-3">
-                    <div class="alert alert-light mw-450px" role="alert">
-                        <h4 class="mb-3">Password requirements:</h4>
-                        <ul class="p-3 mb-0">
-                            <li>Minimum 8 characters long - the more, the better</li>
-                            <li>At least one lowercase character</li>
-                            <li>At least one uppercase character</li>
-                            <li>At least one number, symbol.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div> <!-- / .row -->
+    <div class="col-lg offset-lg-3">
+        <div class="alert alert-light mw-450px" role="alert">
+            <h4 class="mb-3">Password requirements:</h4>
+            <ul class="p-3 mb-0">
+                <li>Minimum 8 characters long - the more, the better</li>
+                <li>At least one lowercase character</li>
+                <li>At least one uppercase character</li>
+                <li>At least one number, symbol.</li>
+            </ul>
+        </div>
+    </div>
+</div> <!-- / .row -->

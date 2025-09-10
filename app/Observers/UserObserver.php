@@ -4,6 +4,7 @@ namespace App\Observers;
 
 use App\Models\User;
 use App\Models\Settings;
+use Illuminate\Support\Facades\Schema;
 
 class UserObserver
 {
@@ -16,13 +17,17 @@ class UserObserver
     public function created(User $user)
     {
         //
+        // If settings table doesn't exist (fresh test DB), skip observer logic
+        if (! Schema::hasTable((new Settings)->getTable())) {
+            return;
+        }
+
         $settings = Settings::where('id', 1)->first();
 
-        if ($settings->enable_verification == 'false') {
+        if ($settings && ($settings->enable_verification ?? 'true') == 'false') {
             $user->email_verified_at = \Carbon\Carbon::now();
             $user->save();
         }
-
     }
 
     /**
