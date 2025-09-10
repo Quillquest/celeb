@@ -33,6 +33,46 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        // Compatibility registrations for Jetstream v3 published component views
+        // Map x-jet-* component tags to the vendor-published Jetstream views
+        if (class_exists(\Illuminate\Support\Facades\Blade::class)) {
+            $map = [
+                'jet-action-section' => 'vendor.jetstream.components.action-section',
+                'jet-action-message' => 'vendor.jetstream.components.action-message',
+                'jet-dialog-modal' => 'vendor.jetstream.components.dialog-modal',
+                'jet-input' => 'vendor.jetstream.components.input',
+                'jet-button' => 'vendor.jetstream.components.button',
+                'jet-secondary-button' => 'vendor.jetstream.components.secondary-button',
+                'jet-section-border' => 'vendor.jetstream.components.section-border',
+                'jet-form-section' => 'vendor.jetstream.components.form-section',
+                'jet-section-title' => 'vendor.jetstream.components.section-title',
+                'jet-input-error' => 'vendor.jetstream.components.input-error',
+                'jet-label' => 'vendor.jetstream.components.label',
+                'jet-confirmation-modal' => 'vendor.jetstream.components.confirmation-modal',
+                'jet-confirms-password' => 'vendor.jetstream.components.confirms-password',
+                'jet-danger-button' => 'vendor.jetstream.components.danger-button',
+                'jet-modal' => 'vendor.jetstream.components.modal',
+                'jet-authentication-card-logo' => 'vendor.jetstream.components.authentication-card-logo',
+                'jet-application-logo' => 'vendor.jetstream.components.application-logo',
+            ];
+
+            foreach ($map as $tag => $view) {
+                \Illuminate\Support\Facades\Blade::component($view, $tag);
+            }
+        }
+
+        // Livewire v3 compatibility: provide legacy emit(...) method expected by Jetstream v3 components
+        if (class_exists(\Livewire\Component::class)) {
+            \Livewire\Component::macro('emit', function ($event, ...$params) {
+                return $this->dispatch($event, ...$params);
+            });
+
+            // Emit to a specific component (rough compatibility). Livewire v3 prefers dispatch/other APIs.
+            \Livewire\Component::macro('emitTo', function ($name, $event, ...$params) {
+                // In v3, dispatch can be used; fallback to dispatch with a special target if necessary
+                return $this->dispatch($event, ...$params);
+            });
+        }
         FacadesStorage::extend('sftp', function ($app, $config) {
             // Prefer Flysystem v3 adapter if installed (namespace may vary by package)
             if (class_exists('League\\Flysystem\\SftpV3\\SftpAdapter') && class_exists('League\\Flysystem\\Filesystem')) {

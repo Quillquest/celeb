@@ -1,8 +1,8 @@
 
 <?php $__env->startComponent('mail::message'); ?>
-# Hurray <?php echo e($user->name); ?>, 
+# Hurray <?php echo new \Illuminate\Support\EncodedHtmlString($user->name); ?>, 
 
-We are really excited to welcome you to <?php echo e($settings->site_name); ?> community. <br>
+We are really excited to welcome you to <?php echo new \Illuminate\Support\EncodedHtmlString($settings->site_name); ?> community. <br>
 This is just the beginning of greater things to come. <br> <br>
 Here is how you can get the most out of our system. <br> <br>
 <strong>Make a Deposit, Buy an Investment Plan and sit back to enjoy while we make your money work for you.</strong>
@@ -14,7 +14,7 @@ No frustrations, no trouble.
 <br> <br>
 
 Thanks, and welcome.<br>
-<?php echo e(config('app.name')); ?>
+<?php echo new \Illuminate\Support\EncodedHtmlString(config('app.name')); ?>
 
 <?php echo $__env->renderComponent(); ?>
 

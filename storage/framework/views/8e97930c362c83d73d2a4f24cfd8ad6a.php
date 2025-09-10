@@ -2,19 +2,19 @@
     
     <?php $__env->slot('header'); ?>
         <?php $__env->startComponent('mail::header', ['url' => config('app.url')]); ?>
-            <img src="<?php echo e(asset('storage/' . $settings->logo)); ?>" alt="<?php echo e(config('app.name')); ?>" style="width: 90px">
+            <img src="<?php echo new \Illuminate\Support\EncodedHtmlString(asset('storage/' . $settings->logo)); ?>" alt="<?php echo new \Illuminate\Support\EncodedHtmlString(config('app.name')); ?>" style="width: 90px">
         <?php echo $__env->renderComponent(); ?>
     <?php $__env->endSlot(); ?>
 
     
-    <?php echo e($slot); ?>
+    <?php echo new \Illuminate\Support\EncodedHtmlString($slot); ?>
 
 
     
     <?php if(isset($subcopy)): ?>
         <?php $__env->slot('subcopy'); ?>
             <?php $__env->startComponent('mail::subcopy'); ?>
-                <?php echo e($subcopy); ?>
+                <?php echo new \Illuminate\Support\EncodedHtmlString($subcopy); ?>
 
             <?php echo $__env->renderComponent(); ?>
         <?php $__env->endSlot(); ?>
@@ -23,7 +23,7 @@
     
     <?php $__env->slot('footer'); ?>
         <?php $__env->startComponent('mail::footer'); ?>
-            © <?php echo e(date('Y')); ?> <?php echo e(config('app.name')); ?>. <?php echo app('translator')->get('All rights reserved.'); ?>
+            © <?php echo new \Illuminate\Support\EncodedHtmlString(date('Y')); ?> <?php echo new \Illuminate\Support\EncodedHtmlString(config('app.name')); ?>. <?php echo app('translator')->get('All rights reserved.'); ?>
         <?php echo $__env->renderComponent(); ?>
     <?php $__env->endSlot(); ?>
 <?php echo $__env->renderComponent(); ?>

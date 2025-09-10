@@ -248,7 +248,7 @@ unset($__errorArgs, $__bag); ?>
                                     <select id="country" name="country" x-model="formData.country" required
                                         class="w-full pl-12 pr-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-xl text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200">
                                         <option value="">Select your country</option>
-                                        <?php echo $__env->make('auth.countries', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                                        <?php echo $__env->make('auth.countries', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
                                     </select>
                                 </div>
                                 <?php $__errorArgs = ['country'];
@@ -509,4 +509,4 @@ unset($__errorArgs, $__bag); ?>
 
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('layouts.base1', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /Users/user/Desktop/Websites/Broker/Celebrity/Celebrity/resources/views/auth/modern_register.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.base1', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH /Users/user/Desktop/Websites/Broker/Celebrity/Celebrity/resources/views/auth/modern_register.blade.php ENDPATH**/ ?>

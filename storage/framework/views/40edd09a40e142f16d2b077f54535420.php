@@ -29,7 +29,7 @@ width: 100% !important;
 <tr>
 <td align="center">
 <table class="content" width="100%" cellpadding="0" cellspacing="0" role="presentation">
-<?php echo e($header ?? ''); ?>
+<?php echo new \Illuminate\Support\EncodedHtmlString($header ?? ''); ?>
 
 
 <!-- Email Body -->
@@ -39,10 +39,10 @@ width: 100% !important;
 <!-- Body content -->
 <tr>
 <td class="content-cell">
-<?php echo e(Illuminate\Mail\Markdown::parse($slot)); ?>
+<?php echo new \Illuminate\Support\EncodedHtmlString(Illuminate\Mail\Markdown::parse($slot)); ?>
 
 
-<?php echo e($subcopy ?? ''); ?>
+<?php echo new \Illuminate\Support\EncodedHtmlString($subcopy ?? ''); ?>
 
 </td>
 </tr>
@@ -50,7 +50,7 @@ width: 100% !important;
 </td>
 </tr>
 
-<?php echo e($footer ?? ''); ?>
+<?php echo new \Illuminate\Support\EncodedHtmlString($footer ?? ''); ?>
 
 </table>
 </td>

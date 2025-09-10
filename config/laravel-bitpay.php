@@ -1,10 +1,24 @@
 <?php
 
+/*
+ |--------------------------------------------------------------------------
+ | BitPay config (package removed)
+ |--------------------------------------------------------------------------
+ |
+ | This configuration file was left in place for reference. The BitPay PHP
+ | packages were removed during the Laravel 11 upgrade because they were
+ | incompatible with Symfony 7. If you reintroduce a BitPay integration,
+ | update or replace this config accordingly and require the appropriate
+ | package.
+ |
+ */
+
 return [
     /*
      * This is the full path and name for the private key.
      * The default value is /tmp/laravel-bitpay.pri
      */
+    'enabled'              => env('BITPAY_ENABLED', false),
     'private_key'          => env('BITPAY_PRIVATE_KEY_PATH', '/tmp/laravel-bitpay.pri'),
 
     /*
@@ -26,7 +40,7 @@ return [
      *
      * By default this uses the Bitpay\Storage\EncryptedFilesystemStorage class.
      */
-    'key_storage'          => \BitPayKeyUtils\Storage\EncryptedFilesystemStorage::class,
+    'key_storage'          => env('BITPAY_KEY_STORAGE_CLASS', null),
 
     /*
      * This is the password used to encrypt and decrypt keys on the filesystem.
@@ -37,4 +51,6 @@ return [
      * BitPay Token
      */
     'token'                => env('BITPAY_TOKEN', ''),
+    'webhook_secret'       => env('BITPAY_WEBHOOK_SECRET', null),
+    'base_uri'             => env('BITPAY_BASE_URI', null),
 ];
