@@ -1,0 +1,18 @@
+1. create a database and import the sql database appove
+2. upload the script and extract it on ur cpanel
+3. open the .env and update database details with the one u created 
+4. the website should be on
+5. the admin url is  yoururl/adminlogin/validate_admin
+logins email: admin@admin.com
+password: admin123
+ to add livechat go to resources/views/livechat.blade.php
+
+
+
+
+##please if u are using shared hosting, make sure u right click on the .env file and give it permission 600. its very very important for security purpose. VPS server is best for security purpose, ]
+##Shared lacks security so if u are using shared protect the .env file at all cost by giving it permison 600
+##Hackers get access to ur script, if they get acesss to this .env file because it contains the database details once they get access to this file, they copy  the database details and login into ur database then they can go to the admin table and change password or to the wthmethod table in database where wallet address is stored and change your wallet address. protect this .env file at all cost. right click and give it permison 600. please i beg u also make sure app_debug is false. for mor script vist https://selar.com/m/Jeditech OR https://selar.com/m/Jeditech1
+
+
+ contacy su via whatsapp on +2349162671360

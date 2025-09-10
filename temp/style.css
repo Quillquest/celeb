@@ -1,0 +1,511 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html{
+    scroll-behavior: smooth;
+}
+
+body{
+    max-width: 375px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 400;
+    font-size: 1rem;
+}
+
+h1,h2,h3,p,ul,ol,li,a,textarea,select,input,label,form,span,small,b,button,div{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 400;
+    font-size: 1rem;
+    text-decoration: none;
+    list-style: none;
+}
+
+header,header nav,header aside,header ul,header ol,header div,header span,main,main span,main div,main section,section div,footer,footer div,footer aside,footer nav,form,ul,label,ol,.section,.wrapper,.boxes,.box{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.desktop{
+    display: none;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+}
+
+.desktop .list{
+    width: 300px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.book .list{
+    width: 400px;
+}
+
+.mobile{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    height: 3.4rem;
+    overflow-y: hidden;
+    transition: height .4s ease-in-out;
+}
+
+.drop{
+    height: 25rem;
+}
+
+.mobile .top{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #181c23;
+    padding: 1rem;
+}
+
+.mobile .list{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.mobile .list li{
+    padding: 1rem;
+}
+
+.mobile .list a,.desktop .list a{
+    color: #fff;
+    font-size: .8rem;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+
+.mobile .list a:hover,.desktop .list a:hover{
+    color: #626976;
+}
+
+.header{
+    background-color: #001219;
+    position: fixed;
+    z-index: 1;
+}
+
+.logo{
+    color: #fff;
+    font-weight: 400;
+    font-style: oblique;
+}
+
+.menu{
+    color: #fff;
+    font-weight: 400;
+}
+
+.hero{
+    padding: 1rem;
+    height: 40vh;
+    justify-content: center;
+    background-image: url(images/pexels-marcin-dampc-1684187.html);
+    background-position: center;
+    background-size: cover;
+    background-color: #999;
+    background-blend-mode: multiply;
+}
+
+.hero .box{
+    align-items: center;
+    justify-content: center;
+}
+
+.hero span{
+    text-align: center;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero .carousel-box,.hero .carousel-box div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero .main-heading{
+    font-size: 2rem;
+    color: #fff;
+    text-transform: uppercase;
+    max-width: 400px;
+    font-weight: 501;
+}
+
+.hero .box a{
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 501;
+    margin-top: 1rem;
+    text-decoration: underline;
+}
+
+.hero .box a:hover{
+    color: #001219;
+}
+
+.welcome{
+    background-color: #e5e5e5;
+    height:4rem;
+    padding: 1rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.welcome .box{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.welcome .box .heading{
+    font-weight: 501;
+    text-transform: uppercase;
+    color: #001219;
+}
+
+.welcome .box img{
+    width: 40px;
+}
+
+.testimonies{
+    padding: 1rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.title-box{
+    align-items: center;
+    justify-content: center;
+    padding-block: 2rem;
+}
+
+.title-box .heading{
+    font-weight: 501;
+    font-size: 1.5rem;
+    border-bottom: 2px solid #001219;
+    padding-bottom: .5rem;
+    margin-bottom: .5rem;
+    text-transform: uppercase;
+}
+
+.title-box .paragraph{
+    font-size: .9rem;
+    line-height: 1.5rem;
+    color: #001219;
+    text-align: center;
+    max-width: 600px;
+}
+
+.testimonies .box img{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+
+.testimonies .box{
+    margin-bottom: 2rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.testimonies .box h3{
+    font-weight: 501;
+    font-size: 1rem;
+    margin-block: .5rem;
+}
+
+.testimonies .box p{
+    max-width: 400px;
+    text-align: center;
+    font-size: .9rem;
+    line-height: 1.5rem;
+    color: #181c23;
+}
+
+.about{
+    padding: 1rem;
+    background-color: #e5e5e5;
+}
+
+.brands{
+    padding: 1rem;
+}
+
+.brands .box{
+    align-items: center;
+    justify-content: center;
+}
+
+.contact{
+    padding: 1rem;
+    background-color: #e5e5e5;
+}
+
+.contact .box{
+    margin-bottom: 1rem;
+}
+
+.contact .box .heading{
+    font-weight: 501;
+    margin-bottom: .2rem;
+}
+
+.contact .box a{
+    color: #001219;
+}
+
+.contact .box a:hover{
+    text-decoration: underline;
+}
+
+.footer{
+    padding: 1rem;
+    background-color: #001219;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer span{
+    color: #fff;
+    text-align: center;
+    font-size: .9rem;
+}
+
+.testimonies,.about,.contact,.brands{
+    padding-block: 4rem;
+}
+
+.about .paragraph{
+    max-width: 800px;
+}
+
+main{
+    padding-top:3.3rem;
+}
+
+.auth{
+    padding: 1rem;
+    background-color: #181c23;
+    min-height: 100vh;
+}
+
+.auth .box{
+    max-width: 400px;
+}
+
+.auth .wrapper,.auth .boxes,.auth .box{
+    align-items: center;
+    justify-content: center;
+}
+
+.auth label{
+    color: #fff;
+    font-size: .9rem;
+    margin-bottom: 1rem;
+}
+
+.auth input,.auth select{
+    width: 100%;
+    height: 2.8rem;
+    font-size: .9rem;
+    padding: .3rem;
+    margin-top: .3rem;
+    border-radius: .2rem;
+    border: none;
+    background-color: #fff;
+}
+
+.auth input:focus,.auth input:active{
+    border: none;
+    outline: none;
+}
+
+.auth button{
+    width: 10rem;
+    height: 2.8rem;
+    font-size: .9rem;
+    font-weight: 400;
+    background-color: #023e8a;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.auth button:hover{
+    background-color: #999;
+    color: #023e8a;
+}
+
+.auth .wrapper .heading{
+    color: #fff;
+}
+
+.auth .wrapper .paragraph{
+    color: #626976;
+}
+
+.auth label span input{
+    width: auto;
+    margin: 0;
+    padding: 0;
+}
+
+.auth label span{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.auth label span .paragraph{
+    font-size: .8rem;
+    margin-left: .3rem;
+}
+
+.auth label span .paragraph a{
+    color: #023e8a;
+    font-size: .8rem;
+}
+
+.cards{
+    padding: 1rem;
+    min-height: 100vh;
+}
+
+.cards .box img{
+    width: 100%;
+}
+
+.cards .text{
+    padding: 1rem;
+}
+
+.cards .boxes{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 350px));
+    gap: 1rem;
+}
+
+.cards .box{
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+}
+
+.cards .text .heading{
+    font-size: 1rem;
+    margin-bottom: .5rem;
+    font-weight: 400;
+}
+
+.cards .box a{
+    width: 100%;
+}
+
+.cards button{
+    width: 100%;
+    height: 3rem;
+    background-color: #001219;
+    border: none;
+    color: #e5e5e5;
+    margin-bottom: .3rem;
+    font-size: .9rem;
+    border-radius: .2rem;
+    cursor: pointer;
+}
+
+@media screen and (min-width:376px){
+    body{
+        max-width: 100%;
+    }
+}
+
+@media screen and (min-width:600px){
+    .contact .boxes{
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: center;
+    }
+
+    .contact .box{
+        width: 45%;
+    }
+
+    .testimonies .boxes{
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        gap: 1rem;
+    }
+
+    .testimonies .box{
+        margin: 0;
+    }
+
+    .auth .label-row{
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .auth .label-row label{
+        width: 49%;
+    }
+
+    .auth .label-col label{
+        width: 100%;
+    }
+}
+
+@media screen and (min-width:800px){
+    .testimonies .boxes{
+        grid-template-columns: repeat(3,1fr);
+    }
+
+    .mobile{
+        display: none;
+    }
+
+    .desktop{
+        display: flex;
+    }
+}
+
+@media screen and (min-width:1000px){
+    .testimonies .boxes{
+        grid-template-columns: repeat(4,1fr);
+    }
+
+    .hero{
+        height: 75vh;
+    }
+
+    .hero .main-heading{
+        font-size: 2.5rem;
+        max-width: 700px;
+    }
+
+    .hero span{
+        font-size: 1.5rem;
+    }
+}
