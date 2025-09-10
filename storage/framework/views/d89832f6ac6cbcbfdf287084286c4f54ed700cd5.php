@@ -1,1 +1,0 @@
-<?php /**PATH /Users/user/Desktop/Websites/Broker/Celebrity/Celebrity/resources/views/livechat.blade.php ENDPATH**/ ?>
