@@ -21,7 +21,9 @@ class CreateNotificationsTable extends Migration
             $table->boolean('is_read')->default(false);
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            if (\Illuminate\Support\Facades\Schema::hasTable('users')) {
+                $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            }
             $table->index(['user_id', 'is_read']);
         });
     }

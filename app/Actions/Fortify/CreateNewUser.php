@@ -29,6 +29,27 @@ class CreateNewUser implements CreatesNewUsers
     {
         $settings = Settings::where('id', '1')->first();
         $request = request();
+
+        // If the registration payload doesn't include a username, auto-generate
+        // a unique, URL-friendly username based on the provided name or email.
+        if (empty($input['username'])) {
+            $base = null;
+            if (!empty($input['name'])) {
+                $base = preg_replace('/[^a-z0-9]/', '', strtolower(str_replace(' ', '', $input['name'])));
+            }
+            if (empty($base) && !empty($input['email'])) {
+                $base = preg_replace('/[^a-z0-9]/', '', strtolower(strstr($input['email'], '@', true)));
+            }
+            $base = $base ?: 'user';
+
+            $candidate = $base;
+            $i = 1;
+            while (User::where('username', $candidate)->exists()) {
+                $candidate = $base . $i;
+                $i++;
+            }
+            $input['username'] = $candidate;
+        }
         if ($settings->captcha == "true") {
             Validator::make($input, [
                 'name' => ['required', 'string', 'max:255'],
@@ -64,9 +85,9 @@ class CreateNewUser implements CreatesNewUsers
         $user = User::create([
             'name' => $input['name'],
             'email' => $input['email'],
-            'phone' => $input['phone'],
+            'phone' => $input['phone'] ?? null,
             'username' => $input['username'],
-            'country' => $input['country'],
+            'country' => $input['country'] ?? null,
             'ref_by' => $ref_by_id,
             'status' => 'active',
             'password' => Hash::make($input['password']),

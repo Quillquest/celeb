@@ -38,8 +38,14 @@ return new class extends Migration
             $table->text('admin_notes')->nullable();
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
-            $table->foreign('celebrity_id')->references('id')->on('celebrities')->onDelete('cascade');
+            // Add foreign keys only if referenced tables exist (prevents test DB migration failures)
+            if (\Illuminate\Support\Facades\Schema::hasTable('users')) {
+                $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
+            }
+
+            if (\Illuminate\Support\Facades\Schema::hasTable('celebrities')) {
+                $table->foreign('celebrity_id')->references('id')->on('celebrities')->onDelete('cascade');
+            }
         });
     }
 

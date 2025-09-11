@@ -1,0 +1,42 @@
+<?php $attributes ??= new \Illuminate\View\ComponentAttributeBag;
+
+$__newAttributes = [];
+$__propNames = \Illuminate\View\ComponentAttributeBag::extractPropNames((['disabled' => false]));
+
+foreach ($attributes->all() as $__key => $__value) {
+    if (in_array($__key, $__propNames)) {
+        $$__key = $$__key ?? $__value;
+    } else {
+        $__newAttributes[$__key] = $__value;
+    }
+}
+
+$attributes = new \Illuminate\View\ComponentAttributeBag($__newAttributes);
+
+unset($__propNames);
+unset($__newAttributes);
+
+foreach (array_filter((['disabled' => false]), 'is_string', ARRAY_FILTER_USE_KEY) as $__key => $__value) {
+    $$__key = $$__key ?? $__value;
+}
+
+$__defined_vars = get_defined_vars();
+
+foreach ($attributes->all() as $__key => $__value) {
+    if (array_key_exists($__key, $__defined_vars)) unset($$__key);
+}
+
+unset($__defined_vars); ?>
+<?php
+if (Auth::user()->dashboard_style == 'light') {
+    $bgmenu = 'blue';
+    $bg = 'light';
+    $text = 'dark';
+} else {
+    $bgmenu = 'dark';
+    $bg = 'dark';
+    $text = 'light';
+}
+?>
+<input <?php echo e($disabled ? 'disabled' : ''); ?> <?php echo $attributes->merge(['class' => 'border form-control   rounded shadow']); ?>>
+<?php /**PATH /Users/user/Desktop/Websites/Broker/Celebrity/Celebrity/resources/views/vendor/jetstream/components/input.blade.php ENDPATH**/ ?>

@@ -1,6 +1,5 @@
 <?php
-// Suppress deprecation notices from vendor packages in output (they will still be logged).
-error_reporting(E_ALL & ~E_DEPRECATED & ~E_USER_DEPRECATED);
+error_reporting(E_ALL);
 ini_set('display_errors', '0');
 
 use Illuminate\Contracts\Http\Kernel;

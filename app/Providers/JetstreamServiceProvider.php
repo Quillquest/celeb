@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Hash;
 use Laravel\Fortify\Fortify;
 use Illuminate\Support\Facades\DB;
 use App\Models\Settings;
-use Jenssegers\Agent\Agent;
+use Illuminate\Support\Facades\Log;
 
 class JetstreamServiceProvider extends ServiceProvider
 {
@@ -45,20 +45,34 @@ class JetstreamServiceProvider extends ServiceProvider
 
         Fortify::authenticateUsing(function (Request $request) {
             $user = User::where('email', $request->email)->first();
-            $agent = new Agent();
 
-            if (
-                $user &&
-                Hash::check($request->password, $user->password)
-            ) {
+            // Make Agent optional — the package was removed during upgrade in a previous step.
+            $agent = null;
+            if (class_exists('\Jenssegers\\Agent\\Agent')) {
+                try {
+                    $agent = new \Jenssegers\Agent\Agent();
+                } catch (\Throwable $e) {
+                    Log::warning('Failed to instantiate Agent: '.$e->getMessage());
+                }
+            }
+
+            $passwordMatches = $user ? Hash::check($request->password, $user->password) : false;
+            Log::info('Authenticate attempt', ['email' => $request->email, 'user_found' => (bool) $user, 'password_matches' => $passwordMatches]);
+
+            if ($user && $passwordMatches) {
                 $request->session()->put('getAnouc', 'true');
-                DB::table('activities')->insert([
-                    'user' => $user->id,
-                    'ip_address' => $request->ip(),
-                    'device' => $agent->device(),
-                    'browser' => $agent->browser(),
-                    'os' => $agent->platform(),
-                ]);
+                try {
+                    DB::table('activities')->insert([
+                        'user' => $user->id,
+                        'ip_address' => $request->ip(),
+                        'device' => $agent ? $agent->device() : null,
+                        'browser' => $agent ? $agent->browser() : null,
+                        'os' => $agent ? $agent->platform() : null,
+                    ]);
+                } catch (\Throwable $e) {
+                    Log::warning('Failed to record activity: '.$e->getMessage());
+                }
+
                 return $user;
             }
         });

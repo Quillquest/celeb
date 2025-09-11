@@ -4,7 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use Jenssegers\Agent\Agent;
+// Jenssegers\Agent is optional and removed during the Laravel 11 upgrade; instantiate only if available.
 use App\Models\Settings;
 use App\Models\CryptoAccount;
 use Illuminate\Http\Request;
@@ -51,16 +51,24 @@ class SocialLoginController extends Controller
         $settings = settings::where('id', '1')->first();
         $userSocial = Socialite::driver($social)->user();
         $user = User::where(['email' => $userSocial->getEmail()])->first();
-        $agent = new Agent();
+        $agent = null;
+        if (class_exists('Jenssegers\\Agent\\Agent')) {
+            try {
+                $agent = new \Jenssegers\Agent\Agent();
+            } catch (\Throwable $e) {
+                // gracefully continue without agent
+                $agent = null;
+            }
+        }
 
         if ($user) {
             Auth::login($user);
             DB::table('activities')->insert([
                 'user' => $user->id,
                 'ip_address' => $request->ip(),
-                'device' => $agent->device(),
-                'browser' => $agent->browser(),
-                'os' => $agent->platform(),
+                'device' => $agent ? $agent->device() : null,
+                'browser' => $agent ? $agent->browser() : null,
+                'os' => $agent ? $agent->platform() : null,
             ]);
             return redirect()->route('dashboard');
         } else {

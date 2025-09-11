@@ -34,6 +34,10 @@ Route::get('/login', function () {
     return view('auth.modern_login');
 })->name('login')->middleware('guest');
 
+// Ensure Fortify handles the login POST so the application's tests and auth flow work
+use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
+Route::post('/login', [AuthenticatedSessionController::class, 'store'])->middleware('guest');
+
 Route::get('/register', function () {
     return view('auth.modern_register');
 })->name('register')->middleware('guest');

@@ -12,3 +12,8 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
+
+/storage/logs/
+
+.env.pre-filter
+.env.upgrade-backup
