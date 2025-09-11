@@ -110,11 +110,22 @@ class AppServiceProvider extends ServiceProvider
             'tawk_to' => '',
         ];
 
-        if (Schema::hasTable((new Settings)->getTable())) {
-            $settings = Settings::where('id', '1')->first() ?: $defaults;
-            $terms =  (Schema::hasTable((new TermsPrivacy)->getTable()) ? TermsPrivacy::find(1) : null);
-            $moreset =  (Schema::hasTable((new SettingsCont)->getTable()) ? SettingsCont::find(1) : null);
-        } else {
+        // Safely attempt to load settings from DB. If the DB isn't available or
+        // an error occurs, fall back to safe defaults so the application boot
+        // process does not fail (useful during deployments, migrations, CI runs).
+        try {
+            if (Schema::hasTable((new Settings)->getTable())) {
+                $settings = Settings::where('id', '1')->first() ?: $defaults;
+                $terms = (Schema::hasTable((new TermsPrivacy)->getTable()) ? TermsPrivacy::find(1) : null);
+                $moreset = (Schema::hasTable((new SettingsCont)->getTable()) ? SettingsCont::find(1) : null);
+            } else {
+                $settings = $defaults;
+                $terms = null;
+                $moreset = null;
+            }
+        } catch (\Throwable $e) {
+            // Log the issue for visibility, but don't prevent the application from booting.
+            \Illuminate\Support\Facades\Log::warning('AppServiceProvider boot: failed to load settings from DB: ' . $e->getMessage());
             $settings = $defaults;
             $terms = null;
             $moreset = null;
